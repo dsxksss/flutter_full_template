@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:isar/isar.dart';
+import 'package:my_app/src/models/email.dart';
 import 'package:my_app/src/rust/api/simple.dart';
 import 'package:my_app/src/rust/frb_generated.dart';
+import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   await RustLib.init();
@@ -24,6 +27,25 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     loadInfo();
     super.initState();
+  }
+
+  void initDatabase() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final isar = await Isar.open(
+      [EmailSchema],
+      directory: dir.path,
+    );
+    final newEmail = Email()
+      ..title = "Hello World"
+      ..recipients = [
+        Recipient()
+          ..name = "John"
+          ..address = "john@example.com"
+      ];
+
+    await isar.writeTxn((isar) async {
+      await isar.emails.put(newEmail);
+    } as Future Function());
   }
 
   void loadInfo() async {

@@ -39,6 +39,13 @@ dependencies:
     path: rust_builder
   flutter_rust_bridge: 2.4.0
 
+  hooks_riverpod: ^2.5.2
+  flutter_hooks:
+  riverpod_annotation: ^2.3.5
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,6 +58,14 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   integration_test:
     sdk: flutter
+  build_runner: any
+  custom_lint:
+  riverpod_generator: ^2.4.3
+  riverpod_lint: ^2.3.13
+  isar_generator: ^3.1.0+1
+  
+dependency_overrides:
+  analyzer: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
